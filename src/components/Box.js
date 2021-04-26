@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { getRandomColor } from "../utils";
+import { AppDataContext } from "../contexts/appContext";
 
 function getStyle(width, color) {
 	let boxStyle = {
 		width: `${width}px`,
 		height: `${width}px`,
-		border: `2px solid ${color}`,
+		border: `5px solid ${color}`,
 	};
 	return boxStyle;
 }
@@ -12,15 +14,25 @@ function getStyle(width, color) {
 function Box(props) {
 	let width = props.width;
 	let stepSize = props.stepSize;
-	let color = ["black", "red", "green", "blue"];
+	const [appData, setAppData] = useContext(AppDataContext);
+	let isLast = width - stepSize === 0;
 
-	let boxStyle = getStyle(width, color[0]);
+	let boxStyle = props.outerMost ? getStyle(width, appData.color) : getStyle(width, "black");
 
-	// let boxStyle = props.outerMost ? getStyle(width, color[(Math.random * 10) / 4]) : getStyle(width, color[(Math.random * 10) / 4]);
+	function changeColor() {
+		if (isLast) {
+			setAppData((prev) => {
+				return {
+					...prev,
+					color: getRandomColor(),
+				};
+			});
+		}
+	}
 
 	if (width) {
 		return (
-			<div className="box-item" style={boxStyle}>
+			<div className="box-item" style={boxStyle} onClick={changeColor}>
 				<Box width={width - stepSize} stepSize={stepSize} />
 			</div>
 		);
