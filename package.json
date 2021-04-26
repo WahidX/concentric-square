@@ -1,5 +1,6 @@
 {
   "name": "test",
+  "homepage": "https://WahidX.github.io/concentric-square",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
