@@ -17,8 +17,8 @@
    You can folow the commands to do the same.
 
 ```bash
-git clone https://github.com/WahidX/test-app.git
-cd test-app
+git clone https://github.com/WahidX/concentric-square.git
+cd concentric-square
 npm install
 ```
 
